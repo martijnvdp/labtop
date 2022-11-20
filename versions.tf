@@ -5,8 +5,9 @@ terraform {
       version = ">= 2.2.0"
     }
     kind = {
-      source  = "unicell/kind"
-      version = "0.0.2-u2"
+      source  = "tehcyx/kind"
+      version = "0.0.15"
     }
   }
 }
+
