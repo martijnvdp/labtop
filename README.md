@@ -1,4 +1,5 @@
-# laptop a kubernetes lab for the laptop using terraform kind
+# LaBTop
+Setup a kubernetes cluster lab using terraform
 
 # requirements
 
@@ -6,7 +7,5 @@
 - docker
 - terraform
 
-# terraform-aws-ccv-eks-platform-resources
-Repository containing terraform module to install and manage additional platform resources
 <!--- BEGIN_TF_DOCS --->
 <!--- END_TF_DOCS --->
