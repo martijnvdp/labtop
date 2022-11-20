@@ -1,5 +1,5 @@
 module "eks" {
-  source = "./terraform/modules/cluster"
+  source = "../../terraform/modules/cluster"
 
   kindCluster = {
     name    = "labtop"
