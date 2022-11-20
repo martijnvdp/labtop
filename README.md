@@ -25,11 +25,6 @@ module "eks" {
 }
 ```
 
-## ingress
-manual install ingress:
-```
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
-```
 ## tools after install
 
 http://hubble-ui.127.0.0.1.nip.io/
