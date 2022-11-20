@@ -48,7 +48,7 @@ variable "ingressController" {
     name       = optional(string, "ingress-nginx")
     namespace  = optional(string, "ingress-nginx")
     repository = optional(string, "https://kubernetes.github.io/ingress-nginx")
-    valueFile  = optional(string, "")
+    values     = optional(string, "")
     version    = optional(string, "v4.4.0")
   })
   description = "Ingress controller settings"
