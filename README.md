@@ -28,7 +28,7 @@ module "eks" {
 ## tools after install
 
 - Hubble UI: http://hubble-ui.127.0.0.1.nip.io/
-- ArgoCD: http://argocd.127.0.0.1.nip.io
+- ArgoCD: http://argo-cd.127.0.0.1.nip.io
 
 ## argoCD
 Get Base64 encoded default admin password:
