@@ -35,11 +35,12 @@ module "eks" {
 
 ## Providers
 
-No provider.
 
 ## Inputs
 
-No input.
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| kindCluster | Cluster settings | <pre>object({<br>    name    = optional(string, "lab")<br>    version = optional(string, "v1.22.15")<br>    config = optional(object({<br>      disableDefaultCNI = optional(bool, true)<br>      controlNodes      = optional(number, 1)<br>      workerNodes       = optional(number, 3)<br>    }), {})<br>  })</pre> | `{}` | no |
 
 ## Outputs
 
