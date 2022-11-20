@@ -1,3 +1,16 @@
+variable "argoCD" {
+  type = object({
+    chart      = optional(string, "argo-cd")
+    name       = optional(string, "argo-cd")
+    namespace  = optional(string, "argo-cd")
+    repository = optional(string, "https://argoproj.github.io/argo-helm")
+    timeout    = optional(number, 600)
+    version    = optional(string, "v5.7.0") # higher version requires k8 1.22+
+  })
+  description = "ArgoCD controller settings"
+  default     = {}
+}
+
 variable "cilium" {
   type = object({
     chart      = optional(string, "cilium")
