@@ -11,7 +11,7 @@ Setup a kubernetes cluster lab using terraform
 
 ```hcl
 module "eks" {
-  source = "git::https://github.com/martijnvdp/labtop.git?ref=v0.0.1"
+  source = "git::https://github.com/martijnvdp/labtop.git?ref=v0.0.3"
 
   kindCluster = {
     name    = "labtop"
