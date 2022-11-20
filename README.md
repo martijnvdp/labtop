@@ -1,5 +1,5 @@
 # LaBTop
-Setup a kubernetes cluster lab using terraform
+Deploy in a few minutes a local kubernetes cluster lab using terraform with cilium, ingress, ArgoCD
 
 # requirements
 
@@ -24,6 +24,7 @@ module "eks" {
   }
 }
 ```
+`terraform init` & `terraform plan` & `terraform apply`
 
 ## tools after install
 
