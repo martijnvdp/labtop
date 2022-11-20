@@ -42,6 +42,19 @@ variable "cilium" {
   default     = {}
 }
 
+variable "ingressController" {
+  type = object({
+    chart      = optional(string, "ingress-nginx")
+    name       = optional(string, "ingress-nginx")
+    namespace  = optional(string, "ingress-nginx")
+    repository = optional(string, "https://kubernetes.github.io/ingress-nginx")
+    valueFile  = optional(string, "")
+    version    = optional(string, "v4.4.0")
+  })
+  description = "Ingress controller settings"
+  default     = {}
+}
+
 variable "kindCluster" {
   type = object({
     name    = optional(string, "lab")
