@@ -11,7 +11,7 @@ Setup a kubernetes cluster lab using terraform
 
 ```hcl
 module "eks" {
-  source = "git::https://github.com/martijnvdp/labtop.git?ref=v0.0.3"
+  source = "git::https://github.com/martijnvdp/labtop.git?ref=v0.0.4"
 
   kindCluster = {
     name    = "labtop"
@@ -27,8 +27,12 @@ module "eks" {
 
 ## tools after install
 
-http://hubble-ui.127.0.0.1.nip.io/
+- Hubble UI: http://hubble-ui.127.0.0.1.nip.io/
+- ArgoCD: http://argocd.127.0.0.1.nip.io
 
+## argoCD
+Get Base64 encoded default admin password:
+` $(kubectl -n argo-cd get secret argocd-initial-admin-secret -o jsonpath="{.data}"|ConvertFrom-Json).password|ConvertFrom-Base64`
 <!--- BEGIN_TF_DOCS --->
 ## Requirements
 
