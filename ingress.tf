@@ -9,7 +9,7 @@ resource "helm_release" "ingress-controller" {
   repository       = var.ingressController.repository
   version          = var.ingressController.version
 
-  values = [var.ingressController.valueFile != "" ? file("${path.module}/templates/ingress_config.yaml") : var.ingressController.valueFile]
+  values = [var.ingressController.values == "" ? file("${path.module}/templates/ingress_config.yaml") : var.ingressController.values]
 
   depends_on = [
     kind_cluster.default,
