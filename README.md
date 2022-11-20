@@ -31,16 +31,19 @@ module "eks" {
 | Name | Version |
 |------|---------|
 | helm | >= 2.2.0 |
-| kind | 0.0.2-u2 |
+| kind | 0.0.15 |
 
 ## Providers
 
+| Name | Version |
+|------|---------|
+| kind | 0.0.15 |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| kindCluster | Cluster settings | <pre>object({<br>    name    = optional(string, "lab")<br>    version = optional(string, "v1.22.15")<br>    config = optional(object({<br>      disableDefaultCNI = optional(bool, true)<br>      controlNodes      = optional(number, 1)<br>      workerNodes       = optional(number, 3)<br>    }), {})<br>  })</pre> | `{}` | no |
+| kindCluster | Cluster settings | <pre>object({<br>    name    = optional(string, "lab")<br>    version = optional(string, "v1.22.15")<br>    config = optional(object({<br>      controlNodes      = optional(number, 1)<br>      disableDefaultCNI = optional(bool, true)<br>      ingress           = optional(bool, true)<br>      workerNodes       = optional(number, 3)<br>    }), {})<br>  })</pre> | `{}` | no |
 
 ## Outputs
 
