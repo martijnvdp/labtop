@@ -11,7 +11,7 @@ Deploy in a few minutes a local kubernetes cluster lab using terraform with cili
 
 ```hcl
 module "eks" {
-  source = "git::https://github.com/martijnvdp/labtop.git?ref=v0.0.4"
+  source = "git::https://github.com/martijnvdp/labtop.git?ref=v0.0.5"
 
   kindCluster = {
     name    = "labtop"
@@ -28,12 +28,13 @@ module "eks" {
 
 ## tools after install
 
-- Hubble UI: http://hubble-ui.127.0.0.1.nip.io/
 - ArgoCD: http://argo-cd.127.0.0.1.nip.io
+- Hubble UI: http://hubble-ui.127.0.0.1.nip.io/
+- LaBTop info: http://labtop-info.127.0.0.1.nip.io/ 
 
 ## argoCD
 Get Base64 encoded default admin password:
-` $(kubectl -n argo-cd get secret argocd-initial-admin-secret -o jsonpath="{.data}"|ConvertFrom-Json).password|ConvertFrom-Base64`
+http://labtop-info.127.0.0.1.nip.io/
 <!--- BEGIN_TF_DOCS --->
 ## Requirements
 

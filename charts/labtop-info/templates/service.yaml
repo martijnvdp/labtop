@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: labtop-info
+  namespace: {{ .Values.namespace }}
+spec:
+  selector:
+    app: labtop-info
+  sessionAffinity: None
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  type: ClusterIP
