@@ -49,3 +49,22 @@ resource "kind_cluster" "default" {
     }
   }
 }
+
+resource "helm_release" "labtopInfo" {
+  provider         = helm
+  name             = "labtop-info"
+  chart            = "labtop-info"
+  create_namespace = true
+  namespace        = var.argoCD.namespace
+  repository       = "${path.module}/charts"
+
+  set {
+    name  = "ingress.enabled"
+    value = var.kindCluster.config.ingress
+  }
+
+  depends_on = [
+    kind_cluster.default,
+    helm_release.cilium
+  ]
+}
