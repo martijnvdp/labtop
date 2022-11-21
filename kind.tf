@@ -1,7 +1,7 @@
 resource "kind_cluster" "default" {
   name           = var.kindCluster.name
   node_image     = "kindest/node:${var.kindCluster.version}"
-  wait_for_ready = true
+  wait_for_ready = var.kindCluster.waitForReady
 
   kind_config {
     kind        = "Cluster"
