@@ -70,8 +70,9 @@ variable "ingressController" {
 
 variable "kindCluster" {
   type = object({
-    name    = optional(string, "lab")
-    version = optional(string, "v1.22.15")
+    name         = optional(string, "lab")
+    version      = optional(string, "v1.22.15")
+    waitForReady = optional(bool, false)
     config = optional(object({
       controlNodes      = optional(number, 1)
       disableDefaultCNI = optional(bool, true)
