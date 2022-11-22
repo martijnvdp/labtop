@@ -70,14 +70,14 @@ variable "ingressController" {
 
 variable "kindCluster" {
   type = object({
-    name         = optional(string, "lab")
+    name         = optional(string, "labtop")
     version      = optional(string, "v1.22.15")
     waitForReady = optional(bool, false)
     config = optional(object({
       controlNodes      = optional(number, 1)
       disableDefaultCNI = optional(bool, true)
       ingress           = optional(bool, true)
-      workerNodes       = optional(number, 3)
+      workerNodes       = optional(number, 0)
     }), {})
   })
   description = "Cluster settings"
