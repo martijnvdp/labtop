@@ -34,6 +34,7 @@ module "eks" {
 ## tools after install
 
 - ArgoCD: http://argo-cd.127.0.0.1.nip.io
+- Game 2048: http://game-2048.127.0.0.1.nip.io
 - Hubble UI: http://hubble-ui.127.0.0.1.nip.io/
 - LaBTop info: http://labtop-info.127.0.0.1.nip.io/ 
 

@@ -7,7 +7,22 @@ variable "argoCD" {
     timeout    = optional(number, 600)
     version    = optional(string, "v5.7.0") # higher version requires k8 1.22+
   })
-  description = "ArgoCD controller settings"
+  description = "ArgoCD deployment settings"
+  default     = {}
+}
+
+variable "argoCDApps" {
+  type = object({
+    chart      = optional(string, "argocd-apps")
+    name       = optional(string, "argocd-apps")
+    namespace  = optional(string, "argo-cd")
+    repository = optional(string, "https://argoproj.github.io/argo-helm")
+    version    = optional(string, "v0.0.3")
+    deploy = optional(object({
+      game2048 = optional(bool, true)
+    }), {})
+  })
+  description = "ArgoCD application(sets) and projects"
   default     = {}
 }
 
