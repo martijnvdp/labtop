@@ -74,12 +74,14 @@ curl https://raw.githubusercontent.com/martijnvdp/bash-code-snippets/main/wsl2/b
 |------|---------|
 | helm | >= 2.2.0 |
 | kind | 0.0.15 |
+| null | n/a |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| argoCD | ArgoCD controller settings | <pre>object({<br>    chart      = optional(string, "argo-cd")<br>    name       = optional(string, "argo-cd")<br>    namespace  = optional(string, "argo-cd")<br>    repository = optional(string, "https://argoproj.github.io/argo-helm")<br>    timeout    = optional(number, 600)<br>    version    = optional(string, "v5.7.0") # higher version requires k8 1.22+<br>  })</pre> | `{}` | no |
+| argoCD | ArgoCD deployment settings | <pre>object({<br>    chart      = optional(string, "argo-cd")<br>    name       = optional(string, "argo-cd")<br>    namespace  = optional(string, "argo-cd")<br>    repository = optional(string, "https://argoproj.github.io/argo-helm")<br>    timeout    = optional(number, 600)<br>    version    = optional(string, "v5.7.0") # higher version requires k8 1.22+<br>  })</pre> | `{}` | no |
+| argoCDApps | ArgoCD application(sets) and projects | <pre>object({<br>    chart      = optional(string, "argocd-apps")<br>    name       = optional(string, "argocd-apps")<br>    namespace  = optional(string, "argo-cd")<br>    repository = optional(string, "https://argoproj.github.io/argo-helm")<br>    version    = optional(string, "v0.0.3")<br>    deploy = optional(object({<br>      game2048 = optional(bool, true)<br>    }), {})<br>  })</pre> | `{}` | no |
 | cilium | Cilium settings | <pre>object({<br>    chart      = optional(string, "cilium")<br>    name       = optional(string, "cilium")<br>    namespace  = optional(string, "kube-system")<br>    repository = optional(string, "https://helm.cilium.io/")<br>    version    = optional(string, "v1.12.4")<br>  })</pre> | `{}` | no |
 | ingressController | Ingress controller settings | <pre>object({<br>    chart      = optional(string, "ingress-nginx")<br>    name       = optional(string, "ingress-nginx")<br>    namespace  = optional(string, "ingress-nginx")<br>    repository = optional(string, "https://kubernetes.github.io/ingress-nginx")<br>    values     = optional(string, "")<br>    version    = optional(string, "v4.4.0")<br>  })</pre> | `{}` | no |
 | kindCluster | Cluster settings | <pre>object({<br>    name         = optional(string, "labtop")<br>    version      = optional(string, "v1.22.15")<br>    waitForReady = optional(bool, false)<br>    config = optional(object({<br>      controlNodes      = optional(number, 1)<br>      disableDefaultCNI = optional(bool, true)<br>      ingress           = optional(bool, true)<br>      workerNodes       = optional(number, 0)<br>    }), {})<br>  })</pre> | `{}` | no |
