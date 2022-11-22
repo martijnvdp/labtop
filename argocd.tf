@@ -5,6 +5,7 @@ resource "helm_release" "argo_cd" {
   create_namespace = true
   namespace        = var.argoCD.namespace
   repository       = var.argoCD.repository
+  timeout          = var.argoCD.timeout
   version          = var.argoCD.version
 
   values = [templatefile("${path.module}/templates/argoCD_config.tpl", {
@@ -14,5 +15,24 @@ resource "helm_release" "argo_cd" {
   depends_on = [
     kind_cluster.default,
     helm_release.cilium
+  ]
+}
+
+resource "helm_release" "argo_cd_apps" {
+  provider         = helm
+  name             = var.argoCDApps.name
+  chart            = var.argoCDApps.chart
+  create_namespace = true
+  namespace        = var.argoCDApps.namespace
+  repository       = var.argoCDApps.repository
+  version          = var.argoCDApps.version
+
+  values = [templatefile("${path.module}/templates/argoCD_apps.tpl.yaml", {
+    game2048 = var.argoCDApps.deploy.game2048
+  })]
+
+  depends_on = [
+    kind_cluster.default,
+    helm_release.argo_cd
   ]
 }

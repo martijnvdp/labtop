@@ -56,7 +56,7 @@ resource "helm_release" "labtopInfo" {
   chart            = "labtop-info"
   create_namespace = true
   namespace        = var.argoCD.namespace
-  repository       = "${path.module}/charts"
+  repository       = "https://martijnvdp.github.io/helm-repo/"
 
   set {
     name  = "ingress.enabled"
