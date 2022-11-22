@@ -7,6 +7,8 @@ Deploy in a few minutes a local kubernetes cluster lab using terraform with cili
 - docker
 - terraform
 
+(see all tools https://github.com/martijnvdp/labtop/tree/dependency#client-tools)
+
 Important: On windows with WSL you need to rebuild a WSL kernel for cilium:
 more info https://github.com/martijnvdp/labtop#wsl-windows-cilium-enterprise
 
@@ -14,7 +16,7 @@ more info https://github.com/martijnvdp/labtop#wsl-windows-cilium-enterprise
 
 ```hcl
 module "eks" {
-  source = "git::https://github.com/martijnvdp/labtop.git?ref=v0.0.5"
+  source = "git::https://github.com/martijnvdp/labtop.git?ref=v0.0.6"
 
   kindCluster = {
     name    = "labtop"
@@ -38,6 +40,25 @@ module "eks" {
 ## argoCD
 Get Base64 encoded default admin password:
 http://labtop-info.127.0.0.1.nip.io/
+
+## WSL Windows Cilium enterprise
+to use cilium on windows icw WSL you need to rebuild a custom WSL kernel 
+
+a script for this can be found here:
+`https://raw.githubusercontent.com/martijnvdp/bash-code-snippets/main/wsl2/build-wsl2-kernel.sh`
+
+to download and run the script, open a wsl terminal and copy this line:
+```
+curl https://raw.githubusercontent.com/martijnvdp/bash-code-snippets/main/wsl2/build-wsl2-kernel.sh -o ./build-wsl-kernel.sh && chmod +x ./build-wsl-kernel.sh && ./build-wsl-kernel.sh
+```
+
+## Client tools
+
+- terraform: https://developer.hashicorp.com/terraform/downloads
+- helm: https://helm.sh/docs/intro/install/
+- kubectl: https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/
+- docker desktop: https://www.docker.com/products/docker-desktop/
+
 <!--- BEGIN_TF_DOCS --->
 ## Requirements
 
@@ -68,19 +89,3 @@ http://labtop-info.127.0.0.1.nip.io/
 No output.
 
 <!--- END_TF_DOCS --->
-
-## WSL Windows Cilium enterprise
-to use cilium on windows icw WSL you need to rebuild a custom WSL kernel 
-
-https://harthoover.com/compiling-your-own-wsl2-kernel/
-install dwarfes before rebuilding the wsl kernel
-and rebuild using the latest version wsl example
- `WSL_COMMIT_REF=linux-msft-wsl-5.10.102.1`
-
-a script for this can be found here : https://github.com/martijnvdp/bash-code-snippets/blob/main/wsl2/build-wsl2-kernel.sh
-
-to download and run the script, open a wsl terminal and copy this line:
-
-```
-curl https://raw.githubusercontent.com/martijnvdp/bash-code-snippets/main/wsl2/build-wsl2-kernel.sh -o ./build-wsl-kernel.sh && chmod +x ./build-wsl-kernel.sh && ./build-wsl-kernel.sh
-```
