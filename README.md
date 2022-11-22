@@ -7,7 +7,7 @@ Deploy in a few minutes a local kubernetes cluster lab using terraform with cili
 - docker
 - terraform
 
-# usage
+# usage example
 
 ```hcl
 module "eks" {
