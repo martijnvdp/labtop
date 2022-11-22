@@ -7,6 +7,9 @@ Deploy in a few minutes a local kubernetes cluster lab using terraform with cili
 - docker
 - terraform
 
+Important: On windows with WSL you need to rebuild a WSL kernel for cilium:
+more info https://github.com/martijnvdp/labtop#wsl-windows-cilium-enterprise
+
 # usage example
 
 ```hcl
@@ -66,7 +69,11 @@ No output.
 <!--- END_TF_DOCS --->
 
 ## WSL Windows Cilium enterprise
-to use cilium enterprise rebuild custom wsl kernel 
+to use cilium on windows icw WSL you need to rebuild a custom WSL kernel 
+
 https://harthoover.com/compiling-your-own-wsl2-kernel/
 install dwarfes before rebuilding the wsl kernel
-and rebuild using the latest version wsl example `WSL_COMMIT_REF=linux-msft-wsl-5.10.102.1`
+and rebuild using the latest version wsl example
+ `WSL_COMMIT_REF=linux-msft-wsl-5.10.102.1`
+
+a script for this can be found here : https://github.com/martijnvdp/bash-code-snippets/blob/main/wsl2/build-wsl2-kernel.sh
