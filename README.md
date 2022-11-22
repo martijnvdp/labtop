@@ -52,6 +52,7 @@ http://labtop-info.127.0.0.1.nip.io/
 |------|---------|
 | helm | >= 2.2.0 |
 | kind | 0.0.15 |
+| null | n/a |
 
 ## Inputs
 
