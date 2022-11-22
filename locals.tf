@@ -7,4 +7,11 @@ resource "null_resource" "labtop-info" {
   provisioner "local-exec" {
     command = "echo LaBTop info: http://labtop-info.127.0.0.1.nip.io/"
   }
+
+  depends_on = [
+    kind_cluster.default,
+    helm_release.argo_cd,
+    helm_release.labtopInfo,
+    helm_release.cilium
+  ]
 }
