@@ -5,7 +5,7 @@ hostPort:
   enabled: true
 hostServices:
   enabled: false
-  protocols: "tcp, udp"
+  protocols: "tcp"
 hubble:
   enabled: true
   relay:
