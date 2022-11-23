@@ -27,9 +27,10 @@ resource "helm_release" "argo_cd_apps" {
   repository       = var.argoCDApps.repository
   version          = var.argoCDApps.version
 
-  values = [templatefile("${path.module}/templates/argoCD_apps.tpl.yaml", {
-    game2048 = var.argoCDApps.deploy.game2048
-  })]
+  values = compact([templatefile("${path.module}/templates/argoCD_apps.tpl.yaml", {
+    applications = replace(yamlencode(local.applications), "\"", "")
+    projects     = replace(yamlencode(local.projects), "\"", "")
+  })])
 
   depends_on = [
     kind_cluster.default,

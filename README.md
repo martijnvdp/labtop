@@ -3,9 +3,9 @@ Deploy in a few minutes a local kubernetes cluster lab using terraform with cili
 
 # requirements
 
-- kind
-- docker
-- terraform
+- kind `go install sigs.k8s.io/kind@v0.17.0`
+- docker desktop `https://www.docker.com/products/docker-desktop/`
+- terraform `https://developer.hashicorp.com/terraform/downloads`
 
 see all tools https://github.com/martijnvdp/labtop/tree/dependency#client-tools
 
@@ -47,16 +47,19 @@ to use cilium on windows icw WSL you need to rebuild a custom WSL kernel
 
 a script for this can be found here:  
 `https://raw.githubusercontent.com/martijnvdp/bash-code-snippets/main/wsl2/build-wsl2-kernel.sh`
+sources: `https://github.com/microsoft/WSL2-Linux-Kernel/releases`
+
 
 to download and run the script, open a wsl terminal and copy this line:
 ```
-curl https://raw.githubusercontent.com/martijnvdp/bash-code-snippets/main/wsl2/build-wsl2-kernel.sh -o ./build-wsl-kernel.sh && chmod +x ./build-wsl-kernel.sh && ./build-wsl-kernel.sh
+curl https://raw.githubusercontent.com/martijnvdp/bash-code-snippets/main/wsl2/build-wsl2-kernel.sh -o ./build-wsl-kernel.sh && sudo chmod +x ./build-wsl-kernel.sh && sudo ./build-wsl-kernel.sh
 ```
 
 ## Client tools
 
 - terraform: https://developer.hashicorp.com/terraform/downloads
 - helm: https://helm.sh/docs/intro/install/
+- kind `go install sigs.k8s.io/kind@v0.17.0`
 - kubectl: https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/
 - docker desktop: https://www.docker.com/products/docker-desktop/
 
