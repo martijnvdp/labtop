@@ -114,3 +114,25 @@ variable "kindCluster" {
   description = "Cluster settings"
   default     = {}
 }
+
+variable "ArgoCDRepositories" {
+  type = map(object({
+    url     = string
+    name    = string
+    project = optional(string, "labtop")
+    type    = string
+  }))
+  description = "Repositories to add to ArgoCD."
+  default     = {}
+}
+
+variable "ArgoCDRepositoryCredentialTemplates" {
+  type = map(object({
+    username = string
+    password = string
+    url      = string
+  }))
+  description = "Repository credential templates"
+  default     = {}
+  sensitive   = true
+}
