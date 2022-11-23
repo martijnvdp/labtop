@@ -16,11 +16,10 @@ more info https://github.com/martijnvdp/labtop#wsl-windows-cilium-enterprise
 
 ```hcl
 module "eks" {
-  source = "git::https://github.com/martijnvdp/labtop.git?ref=v0.0.7"
+  source = "git::https://github.com/martijnvdp/labtop.git?ref=v0.0.8"
 
   kindCluster = {
     name    = "labtop"
-    version = "v1.21.14"
 
     config = {
       controlNodes = 1
