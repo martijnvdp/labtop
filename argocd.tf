@@ -9,7 +9,8 @@ resource "helm_release" "argo_cd" {
   version          = var.argoCD.version
 
   values = [templatefile("${path.module}/templates/argoCD_config.tpl", {
-    ingress = var.kindCluster.config.ingress
+    ingress      = var.kindCluster.config.ingress
+    repositories = replace(yamlencode(merge(local.ArgoCDRepositories, var.ArgoCDRepositories)), "\"", "")
   })]
 
   depends_on = [
@@ -35,5 +36,27 @@ resource "helm_release" "argo_cd_apps" {
   depends_on = [
     kind_cluster.default,
     helm_release.argo_cd
+  ]
+}
+
+resource "kubernetes_secret" "ArgoCDRepositoryCredentialTemplates" {
+  for_each = nonsensitive(toset(keys(var.ArgoCDRepositoryCredentialTemplates)))
+  metadata {
+    name      = each.key
+    namespace = var.argoCD.namespace
+    labels = {
+      "argocd.argoproj.io/secret-type" = "repo-creds"
+    }
+  }
+
+  data = {
+    "username" = var.ArgoCDRepositoryCredentialTemplates[each.key].username
+    "password" = var.ArgoCDRepositoryCredentialTemplates[each.key].password
+    "url"      = var.ArgoCDRepositoryCredentialTemplates[each.key].url
+  }
+
+  depends_on = [
+    kind_cluster.default,
+    helm_release.cilium
   ]
 }

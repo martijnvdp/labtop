@@ -77,12 +77,15 @@ curl https://raw.githubusercontent.com/martijnvdp/bash-code-snippets/main/wsl2/b
 |------|---------|
 | helm | >= 2.2.0 |
 | kind | 0.0.15 |
+| kubernetes | n/a |
 | null | n/a |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| ArgoCDRepositories | Repositories to add to ArgoCD. | <pre>map(object({<br>    url     = string<br>    name    = string<br>    project = optional(string, "labtop")<br>    type    = string<br>  }))</pre> | `{}` | no |
+| ArgoCDRepositoryCredentialTemplates | Repository credential templates | <pre>map(object({<br>    username = string<br>    password = string<br>    url      = string<br>  }))</pre> | `{}` | no |
 | argoCD | ArgoCD deployment settings | <pre>object({<br>    chart      = optional(string, "argo-cd")<br>    name       = optional(string, "argo-cd")<br>    namespace  = optional(string, "argo-cd")<br>    repository = optional(string, "https://argoproj.github.io/argo-helm")<br>    timeout    = optional(number, 600)<br>    version    = optional(string, "v5.7.0") # higher version requires k8 1.22+<br>  })</pre> | `{}` | no |
 | argoCDApplications | ArgoCD Applications | <pre>list(object({<br>    name      = string<br>    namespace = optional(string, "argo-cd")<br>    project   = optional(string, "labtop")<br>    destination = object({<br>      namespace = string<br>      name      = optional(string, "in-cluster")<br>    })<br>    source = object({<br>      chart          = optional(string, null)<br>      repoURL        = optional(string, null)<br>      targetRevision = optional(string, null)<br>      helm = optional(object({<br>        values = optional(string, null)<br>      }), {})<br>    })<br>    syncPolicy = optional(object({<br>      automated = optional(object({<br>        prune    = optional(bool, true)<br>        selfHeal = optional(bool, true)<br>      }), {})<br>      syncOptions = optional(list(string), ["CreateNamespace=true"])<br>    }), {})<br>  }))</pre> | `[]` | no |
 | argoCDApps | ArgoCD application(sets) and projects helm chart settings | <pre>object({<br>    chart                   = optional(string, "argocd-apps")<br>    name                    = optional(string, "argocd-apps")<br>    namespace               = optional(string, "argo-cd")<br>    repository              = optional(string, "https://argoproj.github.io/argo-helm")<br>    version                 = optional(string, "v0.0.3")<br>    deploy_default_apps     = optional(bool, true)<br>    deploy_default_projects = optional(bool, true)<br>  })</pre> | `{}` | no |
