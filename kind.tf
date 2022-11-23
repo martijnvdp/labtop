@@ -50,21 +50,15 @@ resource "kind_cluster" "default" {
   }
 }
 
-resource "helm_release" "labtopInfo" {
-  provider         = helm
-  name             = "labtop-info"
-  chart            = "labtop-info"
-  create_namespace = true
-  namespace        = var.argoCD.namespace
-  repository       = "https://martijnvdp.github.io/helm-repo/"
-
-  set {
-    name  = "ingress.enabled"
-    value = var.kindCluster.config.ingress
+resource "null_resource" "labtop-info" {
+  count = var.kindCluster.config.ingress ? 1 : 0
+  provisioner "local-exec" {
+    command = "echo LaBTop info: http://labtop-info.127.0.0.1.nip.io/"
   }
 
   depends_on = [
     kind_cluster.default,
+    helm_release.argo_cd,
     helm_release.cilium
   ]
 }

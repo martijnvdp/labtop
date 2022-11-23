@@ -1,41 +1,5 @@
-%{ if game2048 }
 applications:
-- name: game-2048
-  namespace: argo-cd
-  destination:
-    namespace: game-2048
-    name: in-cluster
-  source:
-    chart: game2048
-    helm:
-      values: |
-        fullNameOverride: game-2048
-        replicaCount: 2
-        ingress:
-          enabled: true
-          annotations: 
-            kubernetes.io/ingress.class: nginx
-          host: game-2048.127.0.0.1.nip.io
-    repoURL: https://martijnvdp.github.io/helm-repo
-    targetRevision: 0.1.0
-  project: labtop
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-    - CreateNamespace=true%{ endif }
-projects: 
-- name: labtop
-  namespace: argo-cd
-  finalizers:
-  - resources-finalizer.argocd.argoproj.io
-  description: laBtop Project
-  sourceRepos:
-  - "*"
-  destinations:
-  - namespace: "*"
-    name: in-cluster
-  clusterResourceWhitelist:
-  - group: "*"
-    kind: "*"
+  ${indent(2, applications)}
+
+projects:
+  ${indent(2, projects)}

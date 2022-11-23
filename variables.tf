@@ -13,17 +13,65 @@ variable "argoCD" {
 
 variable "argoCDApps" {
   type = object({
-    chart      = optional(string, "argocd-apps")
-    name       = optional(string, "argocd-apps")
-    namespace  = optional(string, "argo-cd")
-    repository = optional(string, "https://argoproj.github.io/argo-helm")
-    version    = optional(string, "v0.0.3")
-    deploy = optional(object({
-      game2048 = optional(bool, true)
-    }), {})
+    chart                   = optional(string, "argocd-apps")
+    name                    = optional(string, "argocd-apps")
+    namespace               = optional(string, "argo-cd")
+    repository              = optional(string, "https://argoproj.github.io/argo-helm")
+    version                 = optional(string, "v0.0.3")
+    deploy_default_apps     = optional(bool, true)
+    deploy_default_projects = optional(bool, true)
   })
-  description = "ArgoCD application(sets) and projects"
+  description = "ArgoCD application(sets) and projects helm chart settings"
   default     = {}
+}
+
+variable "argoCDApplications" {
+  type = list(object({
+    name      = string
+    namespace = optional(string, "argo-cd")
+    project   = optional(string, "labtop")
+    destination = object({
+      namespace = string
+      name      = optional(string, "in-cluster")
+    })
+    source = object({
+      chart          = optional(string, null)
+      repoURL        = optional(string, null)
+      targetRevision = optional(string, null)
+      helm = optional(object({
+        values = optional(string, null)
+      }), {})
+    })
+    syncPolicy = optional(object({
+      automated = optional(object({
+        prune    = optional(bool, true)
+        selfHeal = optional(bool, true)
+      }), {})
+      syncOptions = optional(list(string), ["CreateNamespace=true"])
+    }), {})
+  }))
+  description = "ArgoCD Applications"
+  default     = []
+}
+
+variable "argoCDProjects" {
+  type = list(object({
+    name        = string
+    namespace   = optional(string, "argo-cd")
+    project     = optional(string, "labtop")
+    sourceRepos = optional(list(string), ["'*'"])
+    clusterResourceWhitelist = optional(list(object({
+      kind  = optional(list(string), ["'*'"])
+      group = optional(list(string), ["'*'"])
+    })), [{}])
+    destinations = optional(list(object({
+      namespace = optional(list(string), ["'*'"])
+      name      = optional(string, "in-cluster")
+      server    = optional(string, "https://kubernetes.default.svc")
+    })), [{}])
+  }))
+  description = "ArgoCD Projects"
+  default     = []
 }
 
 variable "cilium" {
