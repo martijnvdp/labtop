@@ -11,6 +11,23 @@ installCRDs: true
 EOT
     } : null
 
+    datadog = var.datadog != null ? {
+      repoURL        = "https://helm.datadoghq.com"
+      targetRevision = "3.3.3"
+      values         = <<-EOT
+agents:
+  useConfigMap: true
+  customAgentConfig:
+    hostname: labtop
+clusterAgent:
+  tokenExistingSecret: ${var.datadog.secret}
+datadog:
+  apiKeyExistingSecret: ${var.datadog.secret}
+  appKeyExistingSecret: ${var.datadog.secret}
+  site: ${var.datadog.site}
+EOT
+    } : null
+
     grafana = var.applications.grafana ? {
       repoURL        = "https://grafana.github.io/helm-charts"
       targetRevision = "6.44.8"

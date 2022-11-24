@@ -1,7 +1,8 @@
 locals {
-  applications = concat(local.defaultCharts, var.argoCDApplications)
-  deployCilium = var.kindCluster.config.disableDefaultCNI
-  projects     = concat(local.default_projects, var.argoCDProjects)
+  applications  = concat(local.defaultCharts, var.argoCDApplications)
+  deployCilium  = var.kindCluster.config.disableDefaultCNI
+  deployDatadog = var.datadog != null
+  projects      = concat(local.default_projects, var.argoCDProjects)
 
   default_projects = var.argoCDApps.deploy_default_projects ? [{
     name        = "labtop"
