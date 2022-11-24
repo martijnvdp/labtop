@@ -1,3 +1,14 @@
+variable "applications" {
+  type = object({
+    cert-manager       = optional(bool, true)
+    game2048           = optional(bool, true)
+    grafana            = optional(bool, true)
+    kube-state-metrics = optional(bool, true)
+    labtop-info        = optional(bool, true)
+  })
+  default = {}
+}
+
 variable "argoCD" {
   type = object({
     chart      = optional(string, "argo-cd")
@@ -5,7 +16,7 @@ variable "argoCD" {
     namespace  = optional(string, "argo-cd")
     repository = optional(string, "https://argoproj.github.io/argo-helm")
     timeout    = optional(number, 600)
-    version    = optional(string, "v5.7.0") # higher version requires k8 1.22+
+    version    = optional(string, "v5.14.1")
   })
   description = "ArgoCD deployment settings"
   default     = {}
@@ -84,19 +95,6 @@ variable "cilium" {
     version    = optional(string, "v1.12.4")
   })
   description = "Cilium settings"
-  default     = {}
-}
-
-variable "ingressController" {
-  type = object({
-    chart      = optional(string, "ingress-nginx")
-    name       = optional(string, "ingress-nginx")
-    namespace  = optional(string, "ingress-nginx")
-    repository = optional(string, "https://kubernetes.github.io/ingress-nginx")
-    values     = optional(string, "")
-    version    = optional(string, "v4.4.0")
-  })
-  description = "Ingress controller settings"
   default     = {}
 }
 

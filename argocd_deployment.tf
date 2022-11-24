@@ -6,7 +6,7 @@ resource "helm_release" "argo_cd" {
   namespace        = var.argoCD.namespace
   repository       = var.argoCD.repository
   timeout          = var.argoCD.timeout
-  version          = var.argoCD.version
+  version          = startswith(var.kindCluster.version, "v1.21") || startswith(var.kindCluster.version, "v1.1") ? "v5.7.0" : var.argoCD.version
 
   values = [templatefile("${path.module}/templates/argoCD_config.tpl", {
     ingress      = var.kindCluster.config.ingress
@@ -34,7 +34,6 @@ resource "helm_release" "argo_cd_apps" {
   })])
 
   depends_on = [
-    kind_cluster.default,
     helm_release.argo_cd
   ]
 }
