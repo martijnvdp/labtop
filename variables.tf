@@ -86,6 +86,27 @@ variable "argoCDProjects" {
   default     = []
 }
 
+variable "datadog" {
+  type = object({
+    namespace = optional(string, "datadog")
+    secret    = optional(string, "datadog-keys")
+    site      = optional(string, "datadoghq.eu")
+    version   = optional(string, "datadog")
+  })
+  description = "Datadog agent deployment settings"
+  default     = {}
+}
+
+variable "datadogKeys" {
+  type = object({
+    api = string
+    app = string
+  })
+  description = "Datadog keys"
+  sensitive   = true
+  default     = null
+}
+
 variable "cilium" {
   type = object({
     chart      = optional(string, "cilium")

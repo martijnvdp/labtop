@@ -78,6 +78,7 @@ curl https://raw.githubusercontent.com/martijnvdp/bash-code-snippets/main/wsl2/b
 | kind | 0.0.15 |
 | kubernetes | n/a |
 | null | n/a |
+| random | n/a |
 
 ## Inputs
 
@@ -91,6 +92,8 @@ curl https://raw.githubusercontent.com/martijnvdp/bash-code-snippets/main/wsl2/b
 | argoCDApps | ArgoCD application(sets) and projects helm chart settings | <pre>object({<br>    chart                   = optional(string, "argocd-apps")<br>    name                    = optional(string, "argocd-apps")<br>    namespace               = optional(string, "argo-cd")<br>    repository              = optional(string, "https://argoproj.github.io/argo-helm")<br>    version                 = optional(string, "v0.0.3")<br>    deploy_default_apps     = optional(bool, true)<br>    deploy_default_projects = optional(bool, true)<br>  })</pre> | `{}` | no |
 | argoCDProjects | ArgoCD Projects | <pre>list(object({<br>    name        = string<br>    namespace   = optional(string, "argo-cd")<br>    project     = optional(string, "labtop")<br>    sourceRepos = optional(list(string), ["'*'"])<br>    clusterResourceWhitelist = optional(list(object({<br>      kind  = optional(list(string), ["'*'"])<br>      group = optional(list(string), ["'*'"])<br>    })), [{}])<br>    destinations = optional(list(object({<br>      namespace = optional(list(string), ["'*'"])<br>      name      = optional(string, "in-cluster")<br>      server    = optional(string, "https://kubernetes.default.svc")<br>    })), [{}])<br>  }))</pre> | `[]` | no |
 | cilium | Cilium settings | <pre>object({<br>    chart      = optional(string, "cilium")<br>    name       = optional(string, "cilium")<br>    namespace  = optional(string, "kube-system")<br>    repository = optional(string, "https://helm.cilium.io/")<br>    version    = optional(string, "v1.12.4")<br>  })</pre> | `{}` | no |
+| datadog | Datadog agent deployment settings | <pre>object({<br>    namespace = optional(string, "datadog")<br>    secret    = optional(string, "datadog-keys")<br>    site      = optional(string, "datadoghq.eu")<br>    version   = optional(string, "datadog")<br>  })</pre> | `{}` | no |
+| datadogKeys | Datadog keys | <pre>object({<br>    api = string<br>    app = string<br>  })</pre> | `null` | no |
 | kindCluster | Cluster settings | <pre>object({<br>    name         = optional(string, "labtop")<br>    version      = optional(string, "v1.22.15")<br>    waitForReady = optional(bool, false)<br>    config = optional(object({<br>      controlNodes      = optional(number, 1)<br>      disableDefaultCNI = optional(bool, true)<br>      ingress           = optional(bool, true)<br>      workerNodes       = optional(number, 0)<br>    }), {})<br>  })</pre> | `{}` | no |
 
 ## Outputs
