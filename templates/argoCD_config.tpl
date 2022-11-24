@@ -10,4 +10,3 @@ configs:
     server.insecure: true
   repositories:
     ${indent(4, repositories)}
-  
