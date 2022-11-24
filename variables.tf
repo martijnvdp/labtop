@@ -36,11 +36,12 @@ variable "argoCDApplications" {
     })
     source = object({
       chart          = optional(string, null)
+      path           = optional(string, null)
       repoURL        = optional(string, null)
       targetRevision = optional(string, null)
       helm = optional(object({
         values = optional(string, null)
-      }), {})
+      }), null)
     })
     syncPolicy = optional(object({
       automated = optional(object({

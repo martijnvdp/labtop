@@ -1,12 +1,9 @@
 locals {
   helm_apps = [{
-    name      = "cert-manager"
-    namespace = "argo-cd"
-    project   = "labtop"
+    name = "cert-manager"
 
     destination = {
       namespace = "cert-manager"
-      name      = "in-cluster"
     }
 
     source = {
@@ -21,14 +18,40 @@ installCRDs: true
 EOF
       }
     }
+    }, {
+    name = "grafana"
 
-    syncPolicy = {
+    destination = {
+      namespace = "grafana"
+    }
 
-      automated = {
-        prune    = true
-        selfHeal = true
-      }
-      syncOptions = ["CreateNamespace=true"]
+    source = {
+      chart          = "grafana"
+      repoURL        = "https://grafana.github.io/helm-charts"
+      targetRevision = "6.44.8"
+
+      helm = {
+        values = <<EOF
+sidecar:
+  dashboards:
+    enabled: true
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+  - grafana.127.0.0.1.nip.io
+EOF
+    } } }, {
+    name = "grafana-dashboards"
+    destination = {
+      namespace = "grafana"
+    }
+
+    source = {
+      path           = "./"
+      repoURL        = "https://github.com/dotdc/grafana-dashboards-kubernetes"
+      targetRevision = "HEAD"
     }
   }]
 }
