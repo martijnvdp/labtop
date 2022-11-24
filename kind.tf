@@ -57,8 +57,6 @@ resource "null_resource" "labtop-info" {
   }
 
   depends_on = [
-    kind_cluster.default,
-    helm_release.argo_cd,
-    helm_release.cilium
+    helm_release.argo_cd_apps
   ]
 }
