@@ -13,15 +13,19 @@ resource "kubernetes_secret" "datadog" {
   }
 
   depends_on = [
-    kubernetes_namespace.datadogNamespace
+    kubernetes_manifest.datadogNamespace
   ]
 }
 
-resource "kubernetes_namespace" "datadogNamespace" {
+resource "kubernetes_manifest" "datadogNamespace" {
   count = local.deployDatadog ? 1 : 0
 
-  metadata {
-    name = var.datadog.namespace
+  manifest = {
+    "apiVersion" = "v1"
+    "kind"       = "Namespace"
+    "metadata" = {
+      "name" = var.datadog.namespace
+    }
   }
 
   depends_on = [

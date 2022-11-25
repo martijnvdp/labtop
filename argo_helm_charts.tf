@@ -12,9 +12,10 @@ EOT
     } : null
 
     datadog = var.datadog != null ? {
-      repoURL        = "https://helm.datadoghq.com"
-      targetRevision = "3.3.3"
-      values         = <<-EOT
+      createNamespace = false
+      repoURL         = "https://helm.datadoghq.com"
+      targetRevision  = "3.3.3"
+      values          = <<-EOT
 agents:
   useConfigMap: true
   customAgentConfig:
@@ -133,7 +134,7 @@ EOT
         selfHeal = true
       }
 
-      syncOptions = ["CreateNamespace=true"]
+      syncOptions = ["CreateNamespace=${try(values.createNamespace, true)}"]
     }
     } if values != null
   ]

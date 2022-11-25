@@ -34,7 +34,8 @@ resource "helm_release" "argo_cd_apps" {
   })])
 
   depends_on = [
-    helm_release.argo_cd
+    helm_release.argo_cd,
+    kubernetes_manifest.datadogNamespace
   ]
 }
 

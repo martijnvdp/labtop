@@ -69,6 +69,7 @@ curl https://raw.githubusercontent.com/martijnvdp/bash-code-snippets/main/wsl2/b
 |------|---------|
 | helm | >= 2.2.0 |
 | kind | 0.0.15 |
+| kubernetes | 2.16.0 |
 
 ## Providers
 
@@ -76,7 +77,7 @@ curl https://raw.githubusercontent.com/martijnvdp/bash-code-snippets/main/wsl2/b
 |------|---------|
 | helm | >= 2.2.0 |
 | kind | 0.0.15 |
-| kubernetes | n/a |
+| kubernetes | 2.16.0 |
 | null | n/a |
 | random | n/a |
 
