@@ -2,6 +2,7 @@ variable "applications" {
   type = object({
     cert-manager       = optional(bool, true)
     game2048           = optional(bool, true)
+    gatekeeper         = optional(bool, true)
     grafana            = optional(bool, true)
     kube-state-metrics = optional(bool, true)
     labtop-info        = optional(bool, true)
