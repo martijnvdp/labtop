@@ -2,8 +2,8 @@ resource "helm_release" "cilium" {
   count = local.deployCilium ? 1 : 0
 
   provider   = helm
-  name       = var.cilium.name
   chart      = var.cilium.chart
+  name       = var.cilium.name
   namespace  = var.cilium.namespace
   repository = var.cilium.repository
   version    = var.cilium.version

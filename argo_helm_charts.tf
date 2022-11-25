@@ -112,8 +112,8 @@ EOT
     project   = "labtop"
 
     destination = {
-      namespace = try(values.namespace, chart)
       name      = "in-cluster"
+      namespace = try(values.namespace, chart)
     }
 
     source = {

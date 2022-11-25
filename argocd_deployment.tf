@@ -10,7 +10,7 @@ resource "helm_release" "argo_cd" {
 
   values = [templatefile("${path.module}/templates/argoCD_config.tpl", {
     ingress      = var.kindCluster.config.ingress
-    repositories = replace(yamlencode(merge(local.ArgoCDRepositories, var.ArgoCDRepositories)), "\"", "")
+    repositories = replace(yamlencode(merge(local.argoCDRepositories, var.argoCDRepositories)), "\"", "")
   })]
 
   depends_on = [
@@ -39,8 +39,8 @@ resource "helm_release" "argo_cd_apps" {
   ]
 }
 
-resource "kubernetes_secret" "ArgoCDRepositoryCredentialTemplates" {
-  for_each = nonsensitive(toset(keys(var.ArgoCDRepositoryCredentialTemplates)))
+resource "kubernetes_secret" "argoCDRepositoryCredentialTemplates" {
+  for_each = nonsensitive(toset(keys(var.argoCDRepositoryCredentialTemplates)))
   metadata {
     name      = each.key
     namespace = var.argoCD.namespace
@@ -50,9 +50,9 @@ resource "kubernetes_secret" "ArgoCDRepositoryCredentialTemplates" {
   }
 
   data = {
-    "username" = var.ArgoCDRepositoryCredentialTemplates[each.key].username
-    "password" = var.ArgoCDRepositoryCredentialTemplates[each.key].password
-    "url"      = var.ArgoCDRepositoryCredentialTemplates[each.key].url
+    "username" = var.argoCDRepositoryCredentialTemplates[each.key].username
+    "password" = var.argoCDRepositoryCredentialTemplates[each.key].password
+    "url"      = var.argoCDRepositoryCredentialTemplates[each.key].url
   }
 
   depends_on = [
