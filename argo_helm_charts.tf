@@ -34,7 +34,7 @@ EOT
       targetRevision = "6.44.8"
       values         = <<EOT
 sidecar:
-  dashboard
+  dashboard:
     enabled: true
 ingress:
   enabled: true
@@ -122,7 +122,7 @@ EOT
       targetRevision = values.targetRevision
 
       helm = {
-        values     = try(values.values, "")
+        values     = replace(try(values.values, ""), "\r\n", "\n")
         parameters = try(values.parameters, [])
       }
     }
