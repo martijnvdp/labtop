@@ -52,8 +52,9 @@ resource "kind_cluster" "default" {
 
 resource "null_resource" "labtop-info" {
   count = var.kindCluster.config.ingress ? 1 : 0
+
   provisioner "local-exec" {
-    command = "echo LaBTop info: http://labtop-info.127.0.0.1.nip.io/"
+    command = "echo Deployment finished LaBTop info should be available soon at the following url: http://labtop-info.127.0.0.1.nip.io/"
   }
 
   depends_on = [

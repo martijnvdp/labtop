@@ -6,7 +6,8 @@ variable "applications" {
     kube-state-metrics = optional(bool, true)
     labtop-info        = optional(bool, true)
   })
-  default = {}
+  description = "Selection of charts to install in ArgoCD"
+  default     = {}
 }
 
 variable "argoCD" {
@@ -25,12 +26,11 @@ variable "argoCD" {
 variable "argoCDApps" {
   type = object({
     chart                   = optional(string, "argocd-apps")
+    deploy_default_projects = optional(bool, true)
     name                    = optional(string, "argocd-apps")
     namespace               = optional(string, "argo-cd")
     repository              = optional(string, "https://argoproj.github.io/argo-helm")
     version                 = optional(string, "v0.0.3")
-    deploy_default_apps     = optional(bool, true)
-    deploy_default_projects = optional(bool, true)
   })
   description = "ArgoCD application(sets) and projects helm chart settings"
   default     = {}
@@ -135,7 +135,7 @@ variable "kindCluster" {
   default     = {}
 }
 
-variable "ArgoCDRepositories" {
+variable "argoCDRepositories" {
   type = map(object({
     url     = string
     name    = string
@@ -146,7 +146,7 @@ variable "ArgoCDRepositories" {
   default     = {}
 }
 
-variable "ArgoCDRepositoryCredentialTemplates" {
+variable "argoCDRepositoryCredentialTemplates" {
   type = map(object({
     username = string
     password = string

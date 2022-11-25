@@ -22,7 +22,7 @@ locals {
     }]
   }] : []
 
-  ArgoCDRepositories = {
+  argoCDRepositories = {
     example = {
       name    = "argocd-example-apps"
       project = "labtop"

@@ -54,6 +54,9 @@ to download and run the script, open a wsl terminal and copy this line:
 curl https://raw.githubusercontent.com/martijnvdp/bash-code-snippets/main/wsl2/build-wsl2-kernel.sh -o ./build-wsl-kernel.sh && sudo chmod +x ./build-wsl-kernel.sh && sudo ./build-wsl-kernel.sh
 ```
 
+check in ubuntu/wsl the version with `uname -r`  
+this should now return the latest version with cilium at the end
+
 ## Client tools
 
 - terraform: https://developer.hashicorp.com/terraform/downloads
