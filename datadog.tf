@@ -9,23 +9,19 @@ resource "kubernetes_secret" "datadog" {
   data = {
     "api-key" = var.datadogKeys.api
     "app-key" = var.datadogKeys.app
-    "token"   = random_password[0].clusterToken
+    "token"   = random_password.clusterToken[0].result
   }
 
   depends_on = [
-    kubernetes_manifest.datadogNamespace
+    kubernetes_namespace.datadogNamespace
   ]
 }
 
-resource "kubernetes_manifest" "datadogNamespace" {
+resource "kubernetes_namespace" "datadogNamespace" {
   count = local.deployDatadog ? 1 : 0
 
-  manifest = {
-    "apiVersion" = "v1"
-    "kind"       = "Namespace"
-    "metadata" = {
-      "name" = var.datadog.namespace
-    }
+  metadata {
+    name = var.datadog.namespace
   }
 
   depends_on = [

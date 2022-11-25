@@ -1,7 +1,7 @@
 locals {
   applications  = concat(local.defaultCharts, var.argoCDApplications)
   deployCilium  = var.kindCluster.config.disableDefaultCNI
-  deployDatadog = var.datadog != null
+  deployDatadog = var.datadogKeys != null
   projects      = concat(local.default_projects, var.argoCDProjects)
 
   default_projects = var.argoCDApps.deploy_default_projects ? [{
