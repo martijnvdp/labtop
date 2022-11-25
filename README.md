@@ -33,7 +33,7 @@ module "eks" {
 ## tools after install
 
 - ArgoCD: http://argo-cd.127.0.0.1.nip.io
-- Game 2048: http://game-2048.127.0.0.1.nip.io
+- Game 2048: http://game2048.127.0.0.1.nip.io
 - Hubble UI: http://hubble-ui.127.0.0.1.nip.io/
 - LaBTop info: http://labtop-info.127.0.0.1.nip.io/ 
 
@@ -49,12 +49,16 @@ a script for this can be found here:
 sources: `https://github.com/microsoft/WSL2-Linux-Kernel/releases`
 
 
-to download and run the script, open a wsl terminal and copy this line:
+to download and run the script, open a wsl ubuntu terminal and copy this line:
 ```
 curl https://raw.githubusercontent.com/martijnvdp/bash-code-snippets/main/wsl2/build-wsl2-kernel.sh -o ./build-wsl-kernel.sh && sudo chmod +x ./build-wsl-kernel.sh && sudo ./build-wsl-kernel.sh
 ```
 
-check in ubuntu/wsl the version with `uname -r`  
+to install ubuntu: 
+`wsl.exe --install -d ubuntu`  
+or to list available distributions: `wsl.exe -l -o`
+
+after the script is finished rebuilding check in ubuntu/wsl the version with `uname -r`  
 this should now return the latest version with cilium at the end
 
 ## Client tools
