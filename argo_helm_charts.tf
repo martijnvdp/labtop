@@ -29,6 +29,15 @@ datadog:
 EOT
     } : null
 
+    gatekeeper = var.applications.gatekeeper ? {
+      repoURL        = "https://open-policy-agent.github.io/gatekeeper/charts"
+      targetRevision = "3.10.0"
+      values         = <<EOT
+fullNameOverride: gatekeeper
+replicas: 1
+EOT
+    } : null
+
     grafana = var.applications.grafana ? {
       repoURL        = "https://grafana.github.io/helm-charts"
       targetRevision = "6.44.8"
