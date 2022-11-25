@@ -5,17 +5,17 @@ locals {
     cert-manager = var.applications.cert-manager ? {
       repoURL        = "https://charts.jetstack.io"
       targetRevision = "1.10.1"
-      values         = <<-EOT
+      values         = <<EOT
 fullNameOverride: cert-manager
 installCRDs: true
 EOT
     } : null
 
-    datadog = var.datadog != null ? {
+    datadog = local.deployDatadog ? {
       createNamespace = false
       repoURL         = "https://helm.datadoghq.com"
       targetRevision  = "3.3.3"
-      values          = <<-EOT
+      values          = <<EOT
 agents:
   useConfigMap: true
   customAgentConfig:
@@ -32,7 +32,7 @@ EOT
     grafana = var.applications.grafana ? {
       repoURL        = "https://grafana.github.io/helm-charts"
       targetRevision = "6.44.8"
-      values         = <<-EOT
+      values         = <<EOT
 sidecar:
   dashboard
     enabled: true
@@ -48,7 +48,7 @@ EOT
     ingress-nginx = var.kindCluster.config.ingress ? {
       repoURL        = "https://kubernetes.github.io/ingress-nginx"
       targetRevision = "v4.4.0"
-      values         = <<-EOT
+      values         = <<EOT
 fullnameOverride: ingress-nginx
 controller:
   extraArgs:
@@ -76,7 +76,7 @@ EOT
     kube-state-metrics = var.applications.kube-state-metrics ? {
       repoURL        = "https://prometheus-community.github.io/helm-charts"
       targetRevision = "4.23.0"
-      values         = <<-EOT
+      values         = <<EOT
 fullnameOverride: kube-state-metrics
 EOT
     } : null
@@ -85,7 +85,7 @@ EOT
       namespace      = var.argoCD.namespace
       repoURL        = "https://martijnvdp.github.io/helm-repo"
       targetRevision = "0.0.1"
-      values         = <<-EOT
+      values         = <<EOT
 ingress:
   enabled: ${var.kindCluster.config.ingress}
 EOT
@@ -94,7 +94,7 @@ EOT
     game2048 = var.applications.game2048 ? {
       repoURL        = "https://martijnvdp.github.io/helm-repo"
       targetRevision = "0.1.0"
-      values         = <<-EOT
+      values         = <<EOT
 fullNameOverride: game2048
 replicaCount: 2
 ingress:
