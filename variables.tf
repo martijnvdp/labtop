@@ -1,11 +1,13 @@
 variable "applications" {
   type = object({
-    cert-manager       = optional(bool, true)
+    cert-manager       = optional(bool, false)
+    externalSecrets    = optional(bool, true)
     game2048           = optional(bool, true)
     gatekeeper         = optional(bool, true)
-    grafana            = optional(bool, true)
-    kube-state-metrics = optional(bool, true)
+    grafana            = optional(bool, false)
+    kube-state-metrics = optional(bool, false)
     labtop-info        = optional(bool, true)
+    prometheus         = optional(bool, false)
   })
   description = "Selection of charts to install in ArgoCD"
   default     = {}

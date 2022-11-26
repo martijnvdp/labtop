@@ -29,6 +29,21 @@ datadog:
 EOT
     } : null
 
+    external-secrets = local.externalSecrets ? {
+      createNamespace = true
+      repoURL         = "https://charts.external-secrets.io"
+      targetRevision  = "0.6.1"
+      values          = <<EOT
+external-secrets:
+  certController:
+    create: false
+  serviceAccount:
+    name: external-secrets
+  webhook:
+    create: false
+EOT
+    } : null
+
     gatekeeper = var.applications.gatekeeper ? {
       repoURL        = "https://open-policy-agent.github.io/gatekeeper/charts"
       targetRevision = "3.10.0"
@@ -111,6 +126,21 @@ ingress:
   annotations:
     kubernetes.io/ingress.class: nginx
   host: game2048.127.0.0.1.nip.io
+EOT
+    } : null
+
+    prometheus = var.applications.prometheus ? {
+      repoURL        = "https://prometheus-community.github.io/helm-charts"
+      targetRevision = "17.0.2"
+      values         = <<EOT
+fullNameOverride: prometheus
+server:
+  ingress:
+      enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+        hosts:
+        - prometheus.127.0.0.1.nip.io
 EOT
     } : null
   }
