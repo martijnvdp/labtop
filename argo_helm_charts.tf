@@ -34,13 +34,12 @@ EOT
       repoURL         = "https://charts.external-secrets.io"
       targetRevision  = "0.6.1"
       values          = <<EOT
-external-secrets:
-  certController:
-    create: false
-  serviceAccount:
-    name: external-secrets
-  webhook:
-    create: false
+certController:
+  create: false
+serviceAccount:
+  name: external-secrets
+webhook:
+  create: false
 EOT
     } : null
 
