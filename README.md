@@ -7,7 +7,7 @@ Deploy in a few minutes a local kubernetes cluster lab using terraform with cili
 - docker desktop `https://www.docker.com/products/docker-desktop/`
 - terraform `https://developer.hashicorp.com/terraform/downloads`
 
-see all tools https://github.com/martijnvdp/labtop/tree/dependency#client-tools
+see all tools https://github.com/martijnvdp/labtop#client-tools
 
 Important: On windows with WSL you need to rebuild a WSL kernel for cilium:
 more info https://github.com/martijnvdp/labtop#wsl-windows-cilium-enterprise
