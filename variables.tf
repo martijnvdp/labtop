@@ -89,6 +89,40 @@ variable "argoCDProjects" {
   default     = []
 }
 
+variable "argoCDRepositories" {
+  type = map(object({
+    url     = string
+    name    = string
+    project = optional(string, "labtop")
+    type    = string
+  }))
+  description = "Repositories to add to ArgoCD."
+  default     = {}
+}
+
+variable "argoCDRepositoryCredentialTemplates" {
+  type = map(object({
+    username = string
+    password = string
+    url      = string
+  }))
+  description = "Repository credential templates"
+  default     = {}
+  sensitive   = true
+}
+
+variable "cilium" {
+  type = object({
+    chart      = optional(string, "cilium")
+    name       = optional(string, "cilium")
+    namespace  = optional(string, "kube-system")
+    repository = optional(string, "https://helm.cilium.io/")
+    version    = optional(string, "v1.12.4")
+  })
+  description = "Cilium settings"
+  default     = {}
+}
+
 variable "datadog" {
   type = object({
     namespace = optional(string, "datadog")
@@ -110,15 +144,17 @@ variable "datadogKeys" {
   default     = null
 }
 
-variable "cilium" {
-  type = object({
-    chart      = optional(string, "cilium")
-    name       = optional(string, "cilium")
-    namespace  = optional(string, "kube-system")
-    repository = optional(string, "https://helm.cilium.io/")
-    version    = optional(string, "v1.12.4")
-  })
-  description = "Cilium settings"
+variable "helmCharts" {
+  type = map(object({
+    chart           = optional(string, "")
+    name            = optional(string, "")
+    createNamespace = optional(bool, true)
+    namespace       = optional(string, "")
+    repoURL         = string
+    targetRevision  = string
+    values          = optional(string, "")
+  }))
+  description = "Map of Helm charts to install in ArgoCD"
   default     = {}
 }
 
@@ -136,26 +172,4 @@ variable "kindCluster" {
   })
   description = "Cluster settings"
   default     = {}
-}
-
-variable "argoCDRepositories" {
-  type = map(object({
-    url     = string
-    name    = string
-    project = optional(string, "labtop")
-    type    = string
-  }))
-  description = "Repositories to add to ArgoCD."
-  default     = {}
-}
-
-variable "argoCDRepositoryCredentialTemplates" {
-  type = map(object({
-    username = string
-    password = string
-    url      = string
-  }))
-  description = "Repository credential templates"
-  default     = {}
-  sensitive   = true
 }

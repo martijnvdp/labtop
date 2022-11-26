@@ -144,18 +144,18 @@ EOT
     } : null
   }
 
-  defaultCharts = [for chart, values in local.helmCharts : {
-    name      = chart
+  defaultCharts = [for chart, values in merge(local.helmCharts, var.helmCharts) : {
+    name      = try(values.name, "") != "" ? values.name : chart
     namespace = var.argoCD.namespace
     project   = "labtop"
 
     destination = {
       name      = "in-cluster"
-      namespace = try(values.namespace, chart)
+      namespace = try(values.namespace, "") != "" ? values.namespace : chart
     }
 
     source = {
-      chart          = chart
+      chart          = try(values.chart, "") != "" ? values.chart : chart
       repoURL        = values.repoURL
       targetRevision = values.targetRevision
 
