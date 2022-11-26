@@ -16,7 +16,7 @@ more info https://github.com/martijnvdp/labtop#wsl-windows-cilium-enterprise
 
 ```hcl
 module "eks" {
-  source = "git::https://github.com/martijnvdp/labtop.git?ref=v0.0.9"
+  source = "git::https://github.com/martijnvdp/labtop.git?ref=v0.1.0"
 
   kindCluster = {
     name    = "labtop"
@@ -92,7 +92,7 @@ this should now return the latest version with cilium at the end
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| applications | Selection of charts to install in ArgoCD | <pre>object({<br>    cert-manager       = optional(bool, true)<br>    game2048           = optional(bool, true)<br>    grafana            = optional(bool, true)<br>    kube-state-metrics = optional(bool, true)<br>    labtop-info        = optional(bool, true)<br>  })</pre> | `{}` | no |
+| applications | Selection of charts to install in ArgoCD | <pre>object({<br>    cert-manager       = optional(bool, true)<br>    game2048           = optional(bool, true)<br>    gatekeeper         = optional(bool, true)<br>    grafana            = optional(bool, true)<br>    kube-state-metrics = optional(bool, true)<br>    labtop-info        = optional(bool, true)<br>  })</pre> | `{}` | no |
 | argoCD | ArgoCD deployment settings | <pre>object({<br>    chart      = optional(string, "argo-cd")<br>    name       = optional(string, "argo-cd")<br>    namespace  = optional(string, "argo-cd")<br>    repository = optional(string, "https://argoproj.github.io/argo-helm")<br>    timeout    = optional(number, 600)<br>    version    = optional(string, "v5.14.1")<br>  })</pre> | `{}` | no |
 | argoCDApplications | ArgoCD Applications | <pre>list(object({<br>    name      = string<br>    namespace = optional(string, "argo-cd")<br>    project   = optional(string, "labtop")<br>    destination = object({<br>      namespace = string<br>      name      = optional(string, "in-cluster")<br>    })<br>    source = object({<br>      chart          = optional(string, null)<br>      path           = optional(string, null)<br>      repoURL        = optional(string, null)<br>      targetRevision = optional(string, null)<br>      helm = optional(object({<br>        values = optional(string, null)<br>      }), null)<br>    })<br>    syncPolicy = optional(object({<br>      automated = optional(object({<br>        prune    = optional(bool, true)<br>        selfHeal = optional(bool, true)<br>      }), {})<br>      syncOptions = optional(list(string), ["CreateNamespace=true"])<br>    }), {})<br>  }))</pre> | `[]` | no |
 | argoCDApps | ArgoCD application(sets) and projects helm chart settings | <pre>object({<br>    chart                   = optional(string, "argocd-apps")<br>    deploy_default_projects = optional(bool, true)<br>    name                    = optional(string, "argocd-apps")<br>    namespace               = optional(string, "argo-cd")<br>    repository              = optional(string, "https://argoproj.github.io/argo-helm")<br>    version                 = optional(string, "v0.0.3")<br>  })</pre> | `{}` | no |
