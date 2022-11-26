@@ -29,7 +29,7 @@ datadog:
 EOT
     } : null
 
-    external-secrets = local.externalSecrets ? {
+    external-secrets = var.applications.externalSecrets ? {
       createNamespace = true
       repoURL         = "https://charts.external-secrets.io"
       targetRevision  = "0.6.1"
